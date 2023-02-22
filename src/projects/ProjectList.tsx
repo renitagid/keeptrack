@@ -23,10 +23,12 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
 
   return (
     <ul className="row">
+{/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
+
       {projects?.map((project) => (
         <div className="cols-sm" key={project.id}>
           {project === projectBeingEdited ? (
-            <ProjectForm onCancel={cancelEditing} onSave={onSave}/>
+            <ProjectForm project={project} onCancel={cancelEditing} onSave={onSave}/>
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}

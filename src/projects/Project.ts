@@ -9,6 +9,7 @@ export class Project {
   contractSignedOn: Date = new Date();
   budget: number = 0;
   isActive: boolean = false;
+//get is a TypeScript accessor that returns a boolean value. It returns true if the id property is undefined. Otherwise, it returns false. This is a TypeScript shorthand for writing a function that returns a boolean value. It is equivalent to: 
   get isNew(): boolean {
     return this.id === undefined;
   }
