@@ -9,9 +9,13 @@ import {
 } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import ProjectPage from "./projects/ProjectPage";
+import store from "./store";
+import { Provider } from "react-redux";
+
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <header className="sticky">
         <span className="logo">
@@ -33,6 +37,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </Provider>
   );
 }
 

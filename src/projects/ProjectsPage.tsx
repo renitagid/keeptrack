@@ -1,62 +1,33 @@
-import { useState, useEffect } from "react";
-import { Project } from "./Project";
+import { useEffect } from "react";
 import ProjectList from "./ProjectList";
-import { projectAPI } from "./projectAPI";
+import { useSelector, useDispatch } from 'react-redux';
+import { loadProjects } from './state/projectActions';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { ProjectState } from './state/projectTypes';
+import { RootState } from "../rootReducer";
 
 const ProjectsPage = () => {
-  // The type of projects is an array of Project objects. The default value is an empty array.
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(false);
+  //useDispatch is a hook that returns a reference to the dispatch function from the Redux store. You may use it to dispatch actions as needed.
+  const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
-  //The type of error is string or undefined. The default value is undefined.
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [currentPage, setCurrentPage] = useState(1);
+//useSelector is a hook that allows you to extract data from the Redux store state, using a selector function. useSelector takes a selector function as an argument. The selector function should be written so that it takes the entire store state as an argument and returns data that is needed by the component. useSelector will use reference equality to check if the output of the selector has changed. This means that a selector should always return the same output for the same input. Otherwise, the component may not be updated when expected.
+  const loading = useSelector((state: RootState) => state.projectState.loading);
+  const projects = useSelector((state: RootState) => state.projectState.projects);
+  const error = useSelector((state: RootState) => state.projectState.error);
+  const currentPage = useSelector((state: RootState) => state.projectState.page);
 
   //type of handleMoreClick is a function that takes no arguments and returns void.
   const handleMoreClick = () => {
-    setCurrentPage((currentPage) => currentPage + 1);
+    dispatch(loadProjects(currentPage + 1));
   };
 
-  useEffect(() => {
-    async function loadProjects() {
-      setLoading(true);
-      try {
-        // await is used to wait for the promise to resolve before moving on to the next line of code. The await keyword can only be used inside an async function.
-        const data = await projectAPI.get(currentPage);
-        setError("");
-        if (currentPage === 1) {
-          setProjects(data);
-        } else {
-          setProjects((projects) => [...projects, ...data]);
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(e.message);
-        }
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProjects();
-  }, [currentPage]);
+    useEffect(() => {
+      //loadProjects is a function that takes a number as an argument and returns void. it was imported from projectActions.ts
+        dispatch(loadProjects(1));
+      }, [dispatch]);
 
-  const saveProject = (project: Project) => {
-    //p: Project is the type of the project in the array, which is defined in the Project interface and imported from Project.tsx
-
-    projectAPI
-      .put(project)
-      .then((updatedProject) => {
-        let updatedProjects = projects.map((p: Project) => {
-          return p.id === project.id ? new Project(updatedProject) : p;
-        });
-        setProjects(updatedProjects);
-      })
-      .catch((e) => {
-        if (e instanceof Error) {
-          setError(e.message);
-        }
-      });
-  };
+  
 
   return (
     <div>
@@ -75,7 +46,7 @@ const ProjectsPage = () => {
         </div>
       )}
 
-      <ProjectList onSave={saveProject} projects={projects} />
+<ProjectList projects={projects} />
 
       {!loading && !error && (
         <div className="row">

@@ -7,11 +7,10 @@ import { useState } from 'react';
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
 interface ProjectListProps {
   projects: Project[];
-  onSave: (project: Project) => void;
 }
 
 //The ProjectList component is a functional component that takes a list of projects as a prop and renders them as JSON.
-const ProjectList = ({ projects, onSave }: ProjectListProps) => {
+const ProjectList = ({ projects }: ProjectListProps) => {
   const [projectBeingEdited, setProjectBeingEdited] = useState({});
   const handleEdit = (project: Project) => {
     setProjectBeingEdited(project);
@@ -28,7 +27,7 @@ const ProjectList = ({ projects, onSave }: ProjectListProps) => {
       {projects?.map((project) => (
         <div className="cols-sm" key={project.id}>
           {project === projectBeingEdited ? (
-            <ProjectForm project={project} onCancel={cancelEditing} onSave={onSave}/>
+            <ProjectForm project={project} onCancel={cancelEditing}/>
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
