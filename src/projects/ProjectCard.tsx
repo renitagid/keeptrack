@@ -1,5 +1,6 @@
 import { Project } from "./Project";
 import React from "react";
+import { Link } from "react-router-dom";
 
 //formatDescription is a helper function that takes a string and returns a substring of the first 60 characters followed by an ellipsis. It is used to format the project description. description is the string to be formatted.
 function formatDescription(description: string): string {
@@ -24,11 +25,13 @@ function ProjectCard(props: ProjectCardProps) {
     <div className="card">
       <img src={project.imageUrl} alt={project.name} />
       <section className="section dark">
+      <Link to={'/projects/' + project.id}>
         <h5 className="strong">
           <strong>{project.name}</strong>
         </h5>
         <p>{formatDescription(project.description)}</p>
         <p>Budget: ${project.budget.toLocaleString()}</p>
+        </Link>
         <button
           className="bordered"
           onClick={() => {

@@ -50,6 +50,21 @@ function convertToProjectModel(item: any): Project {
 }
 
 const projectAPI = {
+  // This is a TypeScript function that takes a project object and returns a Promise object. The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+  find(id: number) {
+    return (
+      fetch(`${url}/${id}`)
+        //checkStatus is a TypeScript function that takes a response object and returns a Promise object. If the response object has an ok property that is true, it returns the response object. Otherwise, it throws an error.
+        .then(checkStatus)
+
+        //parseJSON is a TypeScript function that takes a response object and returns a Promise object. It returns the JSON object that is the result of parsing the body text of the response object.
+        .then(parseJSON)
+
+        //convertToProjectModel is a TypeScript function that takes an object and returns a Project object. It creates a new Project object and passes the object to the constructor of the Project class.
+        .then(convertToProjectModel)
+    );
+  },
+
   put(project: Project) {
     return fetch(`${url}/${project.id}`, {
       method: "PUT",
