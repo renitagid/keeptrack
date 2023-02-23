@@ -1,65 +1,37 @@
-import { useState, useEffect } from "react";
-import { Project } from "./Project";
-import ProjectList from "./ProjectList";
-import { projectAPI } from "./projectAPI";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../state';
+import ProjectList from './ProjectList';
+import { loadProjects } from './state/projectActions';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { ProjectState } from './state/projectTypes';
 
-const ProjectsPage = () => {
-  // The type of projects is an array of Project objects. The default value is an empty array.
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  //The type of error is string or undefined. The default value is undefined.
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  //type of handleMoreClick is a function that takes no arguments and returns void.
-  const handleMoreClick = () => {
-    setCurrentPage((currentPage) => currentPage + 1);
-  };
+function ProjectsPage() {
+  const loading = useSelector(
+    (appState: AppState) => appState.projectState.loading
+  );
+  const projects = useSelector(
+    (appState: AppState) => appState.projectState.projects
+  );
+  const error = useSelector(
+    (appState: AppState) => appState.projectState.error
+  );
+  const currentPage = useSelector(
+    (appState: AppState) => appState.projectState.page
+  );
+  const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
   useEffect(() => {
-    async function loadProjects() {
-      setLoading(true);
-      try {
-        // await is used to wait for the promise to resolve before moving on to the next line of code. The await keyword can only be used inside an async function.
-        const data = await projectAPI.get(currentPage);
-        setError("");
-        if (currentPage === 1) {
-          setProjects(data);
-        } else {
-          setProjects((projects) => [...projects, ...data]);
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(e.message);
-        }
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadProjects();
-  }, [currentPage]);
+    dispatch<any>(loadProjects(1));
+  }, [dispatch]);
 
-  const saveProject = (project: Project) => {
-    //p: Project is the type of the project in the array, which is defined in the Project interface and imported from Project.tsx
-
-    projectAPI
-      .put(project)
-      .then((updatedProject) => {
-        let updatedProjects = projects.map((p: Project) => {
-          return p.id === project.id ? new Project(updatedProject) : p;
-        });
-        setProjects(updatedProjects);
-      })
-      .catch((e) => {
-        if (e instanceof Error) {
-          setError(e.message);
-        }
-      });
+  const handleMoreClick = () => {
+    dispatch(loadProjects(currentPage + 1));
   };
 
   return (
-    <div>
+    <>
       <h1>Projects</h1>
 
       {error && (
@@ -75,7 +47,7 @@ const ProjectsPage = () => {
         </div>
       )}
 
-      <ProjectList onSave={saveProject} projects={projects} />
+      <ProjectList projects={projects} />
 
       {!loading && !error && (
         <div className="row">
@@ -95,8 +67,8 @@ const ProjectsPage = () => {
           <p>Loading...</p>
         </div>
       )}
-    </div>
+    </>
   );
-};
+}
 
 export default ProjectsPage;
