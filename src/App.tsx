@@ -29,7 +29,7 @@ function App() {
             Projects
           </NavLink>
         </header>
-        <div className="container">
+        <div className="container" style={{padding:0, margin:0, height:"85vh"}}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
