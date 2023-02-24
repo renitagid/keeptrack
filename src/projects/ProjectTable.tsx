@@ -29,8 +29,8 @@ const ProjectTable = ({ projects }: ProjectListProps) => {
   //_______________________________________________
 
   return (
-    <>
-      <table >
+    <div style={{height:550}}>
+      <table style={{maxHeight: 550}}>
         <thead>
           <tr>
             <th style={{maxWidth:100}}></th>
@@ -79,7 +79,7 @@ const ProjectTable = ({ projects }: ProjectListProps) => {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
