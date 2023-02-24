@@ -17,10 +17,8 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <header className="sticky">
-          <span className="logo">
-            <img src="/assets/logo-3.svg" alt="logo" width="49" height="99" />
-          </span>
+        <div style={{display:"flex", flexDirection:"column"}}>
+        <header className="sticky" style={{paddingTop:6, paddingLeft:6}}>
           <NavLink to="/" className="button rounded">
             <span className="icon-home"></span>
             Home
@@ -35,6 +33,7 @@ function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectPage />} />
           </Routes>
+        </div>
         </div>
       </Router>
     </Provider>

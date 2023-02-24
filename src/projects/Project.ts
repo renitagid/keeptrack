@@ -3,6 +3,7 @@ export class Project {
   // This is a TypeScript property that is a number or undefined.
   id: number | undefined;
   name: string = "";
+  county: string = "";
   description: string = "";
   imageUrl: string = "";
   contractTypeId: number | undefined;
@@ -21,6 +22,7 @@ export class Project {
     // This is a TypeScript conditional operator that checks if the initializer object has an id property. If it does, it assigns the value to the id property of the class. If it doesn't, it assigns undefined to the id property of the class.
     if (initializer.id) this.id = initializer.id;
     if (initializer.name) this.name = initializer.name;
+    if (initializer.county) this.county = initializer.county;
     if (initializer.description) this.description = initializer.description;
     if (initializer.imageUrl) this.imageUrl = initializer.imageUrl;
     if (initializer.contractTypeId)
