@@ -7,6 +7,7 @@ import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { ProjectState } from "./state/projectTypes";
 import ProjectTable from "./ProjectTable";
+import { Project } from "./Project";
 
 function ProjectsPage() {
   const loading = useSelector(
@@ -31,6 +32,21 @@ function ProjectsPage() {
     dispatch(loadProjects(currentPage + 1));
   };
 
+const [filteredProjects, setFilteredProjects] = useState(projects);
+const filter = (projects: Project[], params: string) => {
+  const filteredProjects = projects.filter((project) => {
+    return (
+      project.name.toLowerCase().includes(params.toLowerCase()) ||
+      project.description
+        .toLowerCase()
+        .includes(params.toLowerCase())
+    );
+  });
+  setFilteredProjects(filteredProjects);
+}
+
+
+
   const [view, setView] = useState("table");
   const [tableButtonColor, setTableButtonColor] = useState("#b7c9e2");
   const [cardButtonColor, setCardButtonColor] = useState("white");
@@ -45,9 +61,14 @@ function ProjectsPage() {
     }
   };
 
+const handleChange = (e: { target: { value: any; }; }) => {
+    const { value } = e.target;
+    filter(projects, value);
+}
+
   return (
     <div>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", alignItems:"center",  justifyContent:"space-around"}}>
         <h1
           style={{ fontFamily: "Gloock, serif", padding: 4, color: "#01579b" }}
         >
@@ -55,6 +76,9 @@ function ProjectsPage() {
         </h1>
         <button onClick={() => handleViewClick("table")} style={{backgroundColor:`${tableButtonColor}`, fontFamily:"Jost, sans-serif"}}>Table View</button>
         <button onClick={() => handleViewClick("card")} style={{backgroundColor:`${cardButtonColor}`, fontFamily:"Jost, sans-serif"}}>Card View</button>
+        <div style={{fontFamily:"Jost, sans-serif" }}>Search:</div>
+        <input style={{fontFamily:"Jost, sans-serif" }} onChange={handleChange}></input>
+        <div style={{fontFamily:"Jost, sans-serif" }}>Results: {filteredProjects.length}</div>
       </div>
       {error && (
         <div className="row">
@@ -68,8 +92,8 @@ function ProjectsPage() {
           </div>
         </div>
       )}
-      {view==="table" && <ProjectTable projects={projects} />}
-      {view==="card" && <ProjectList projects={projects} />}
+      {view==="table" && <ProjectTable projects={filteredProjects} />}
+      {view==="card" && <ProjectList projects={filteredProjects} />}
 
       {!loading && !error && (
         <div className="row">

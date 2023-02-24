@@ -1,8 +1,7 @@
-
 import { Project } from "./Project";
 import ProjectCard from "./ProjectCard";
 import ProjectForm from "./ProjectForm";
-import { useState } from 'react';
+import { useState } from "react";
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
 interface ProjectListProps {
@@ -14,7 +13,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   const [projectBeingEdited, setProjectBeingEdited] = useState({});
   const handleEdit = (project: Project) => {
     setProjectBeingEdited(project);
-  }
+  };
 
   const cancelEditing = () => {
     setProjectBeingEdited({});
@@ -22,12 +21,12 @@ const ProjectList = ({ projects }: ProjectListProps) => {
 
   return (
     <ul className="row">
-{/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
+      {/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
 
       {projects?.map((project) => (
         <div className="cols-sm" key={project.id}>
           {project === projectBeingEdited ? (
-            <ProjectForm project={project} onCancel={cancelEditing}/>
+            <ProjectForm project={project} onCancel={cancelEditing} formStyle="card"/>
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
