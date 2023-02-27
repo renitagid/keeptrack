@@ -1,6 +1,7 @@
 import { Project } from "./Project";
 import ProjectForm from "./ProjectForm";
 import { useState } from "react";
+import ProjectDetail from "./ProjectDetail";
 // ----------------------------------------------
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
@@ -12,22 +13,40 @@ interface ProjectListProps {
 const ProjectTable = (props: ProjectListProps) => {
   const { projects } = props;
   const [form, setForm] = useState("closed");
-  const [projectBeingEdited, setProjectBeingEdited] = useState<Project>(projects[0]);
+  const [projectBeingEdited, setProjectBeingEdited] = useState<Project>(
+    projects[0]
+  );
 
   const cancelEditing = () => {
     setForm("closed");
   };
 
-  //_______________________________________________
   const handleEditClick = (project: Project) => {
     setProjectBeingEdited(project);
     setForm("open");
   };
-  //_______________________________________________
+
+  const [details, setDetails] = useState("closed");
+  const [projectDetails, setProjectDetails] = useState<Project>(projects[0]);
+
+  const cancelDetails = () => {
+    setDetails("closed");
+  };
+
+  const handleDetailsClick = (project: Project) => {
+    setProjectDetails(project);
+    setDetails("open");
+  };
 
   return (
     <div style={{ height: "90%" }}>
-      <table style={form==="open"?{opacity:"25%", maxHeight: 550}: {maxHeight: 550 }}>
+      <table
+        style={
+          form === "open" || details === "open"
+            ? { opacity: "15%", maxHeight: 550 }
+            : { maxHeight: 550 }
+        }
+      >
         <thead>
           <tr>
             <th style={{ maxWidth: 100 }}></th>
@@ -47,7 +66,11 @@ const ProjectTable = (props: ProjectListProps) => {
         </thead>
         <tbody>
           {projects?.map((project) => (
-            <tr key={project.id} style={{ marginTop: 3 }}>
+            <tr
+              key={project.id}
+              style={{ marginTop: 3 }}
+              onClick={() => handleDetailsClick(project)}
+            >
               <td style={{ maxWidth: 100 }}>
                 <img
                   src={project.imageUrl}
@@ -99,24 +122,54 @@ const ProjectTable = (props: ProjectListProps) => {
                   <span className="icon-edit inverse"></span>
                 </button>
               </td>
-
             </tr>
           ))}
         </tbody>
       </table>
       {form === "open" ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "20%",
-                    left: "40%",
-                    zIndex: 999,
-                    opacity:"100%"
-                  }}
-                >
-                  <ProjectForm project={projectBeingEdited} onCancel={cancelEditing} formStyle="table"/>
-                </div>
-              ) : null}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "40%",
+            zIndex: 999,
+            opacity: "100%",
+          }}
+        >
+          <ProjectForm
+            project={projectBeingEdited}
+            onCancel={cancelEditing}
+            formStyle="table"
+          />
+        </div>
+      ) : null}
+      {details === "open" ? (
+        <div
+          style={{
+            position: "absolute",
+            top: "9%",
+            left: "30%",
+            zIndex: 999,
+            opacity: "100%",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "white",
+              width: "500px",
+              display: "flex",
+              flexDirection: "column",
+              padding: 20,
+              border: "solid",
+              borderWidth: 2,
+              borderRadius: 10,
+            }}
+          >
+            <button style={{width:40, margin:0, marginBottom:6, alignSelf:"end"}}onClick={cancelDetails}>X</button>
+            <ProjectDetail project={projectDetails} onCancel={cancelDetails} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
