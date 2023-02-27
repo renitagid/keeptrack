@@ -27,14 +27,14 @@ function HomePage() {
       </p>
         <NavLink
           to="/projects/"
-          className="button rounded"
+
           style={{ fontFamily: "Jost, sans-serif", opacity:"80%" }}
         >
           View Projects
         </NavLink>
         <NavLink
-          to="/projects/"
-          className="button rounded"
+          to="/about/"
+
           style={{ fontFamily: "Jost, sans-serif", opacity:"80%" }}
         >
           About Clean CA

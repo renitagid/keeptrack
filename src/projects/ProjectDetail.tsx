@@ -11,9 +11,9 @@ export default function ProjectDetail({
 }: ProjectDetailProps) {
   return (
         <div style={{display:"flex", flexDirection:"column"}}>
-          <img style={{textAlign:"center"}}className="rounded" src={project.imageUrl} alt={project.name} />
-          <section className="section dark">
-            <h3 className="strong">
+          <img style={{textAlign:"center"}} src={project.imageUrl} alt={project.name} />
+          <section >
+            <h3>
               <strong style={{ fontFamily: "Jost, san-serif" }}>
                 {project.name}
               </strong>
@@ -32,7 +32,7 @@ export default function ProjectDetail({
               Signed: {project.contractSignedOn.toLocaleDateString()}
             </p>
             <p>
-              <mark className="active">
+              <mark>
                 {project.isActive ? "Active" : "Inactive"}
               </mark>
 

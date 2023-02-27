@@ -120,13 +120,10 @@ const ProjectTable = (props: ProjectListProps) => {
                     padding: 1,
                     margin: 0,
                   }}
-                  className=" bordered"
                   onClick={() => {
                     handleEditClick(project);
                   }}
-                >
-                  <span className="icon-edit inverse"></span>
-                </button>
+                ></button>
               </td>
             </tr>
           ))}

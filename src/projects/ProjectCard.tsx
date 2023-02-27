@@ -19,11 +19,11 @@ function ProjectCard(props: ProjectCardProps) {
   };
 
   return (
-    <div className="card" >
+    <div>
       <img src={project.imageUrl} alt={project.name} style={{width:500, height:200, objectFit:"cover" }}/>
-      <section className="section" style={{height:228, position:"relative"}}>
+      <section style={{height:228, position:"relative"}}>
         <Link to={'/projects/' + project.id}>
-          <h5 className="strong">
+          <h5>
             <strong style={{fontFamily:"Jost, san-serif"}}>{project.name}</strong>
           </h5>
           <p style={{fontFamily:"Jost, san-serif"}}>{formatDescription(project.description)}</p>
@@ -31,12 +31,10 @@ function ProjectCard(props: ProjectCardProps) {
         </Link>
         <button
         style={{position:"absolute", bottom:0, left:0, fontFamily:"Jost, san-serif", color:"white", backgroundColor:"#b7c9e2"}}
-          className=" bordered"
           onClick={() => {
             handleEditClick(project);
           }}
         >
-          <span className="icon-edit inverse"></span>
           Edit
         </button>
       </section>

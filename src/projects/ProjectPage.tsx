@@ -29,35 +29,56 @@ function ProjectPage(props: any) {
   }, [params.id, props.id]);
 
   return (
-    <div style={{backgroundColor:"lightgray", position:"relative", top:-20, display:"flex", flexDirection:"column", alignItems:"center"}}>
-      <div style={{backgroundColor:"white", width:"50%", borderWidth:2, border:"solid", borderRadius:10, margin:20, position:"relative", top:10, padding:10, display:"flex", flexDirection:"column", alignItems:"center" }}>
-        <div style={{width:"75%" }}>
-        <span style={{ display: "flex", justifyContent: "space-between" }}>
-          <h1 style={{ fontFamily: "Gloock, serif" }}>Project Details</h1>
-        </span>
-        {loading && (
-          <div className="center-page">
-            <span className="spinner primary"></span>
-            <p>Loading...</p>
-          </div>
-        )}
-
-        {error && (
-          <div className="row">
-            <div className="card large error">
-              <section>
-                <p>
-                  <span className="icon-alert inverse "></span> {error}
-                </p>
-              </section>
+    <div
+      style={{
+        backgroundColor: "lightgray",
+        position: "relative",
+        top: -20,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "white",
+          width: "50%",
+          borderWidth: 2,
+          border: "solid",
+          borderRadius: 10,
+          margin: 20,
+          position: "relative",
+          top: 10,
+          padding: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ width: "75%" }}>
+          <span style={{ display: "flex", justifyContent: "space-between" }}>
+            <h1 style={{ fontFamily: "Gloock, serif" }}>Project Details</h1>
+          </span>
+          {loading && (
+            <div>
+              <p>Loading...</p>
             </div>
-          </div>
-        )}
+          )}
 
-        {project && (
-          <ProjectDetail project={project} onCancel={props.onCancel} />
-        )}
-      </div>
+          {error && (
+            <div>
+              <div>
+                <section>
+                  <p>{error}</p>
+                </section>
+              </div>
+            </div>
+          )}
+
+          {project && (
+            <ProjectDetail project={project} onCancel={props.onCancel} />
+          )}
+        </div>
       </div>
     </div>
   );

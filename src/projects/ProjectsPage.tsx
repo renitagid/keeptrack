@@ -61,7 +61,7 @@ function ProjectsPage() {
   const handleSearchClick = () => {
     filter(projects, search);
   };
-  
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -110,13 +110,10 @@ function ProjectsPage() {
         </div>
       </div>
       {error && (
-        <div className="row">
-          <div className="card large error">
+        <div>
+          <div>
             <section>
-              <p>
-                <span className="icon-alert inverse "></span>
-                {error}
-              </p>
+              <p>{error}</p>
             </section>
           </div>
         </div>
@@ -129,8 +126,8 @@ function ProjectsPage() {
       )}
 
       {loading && (
-        <div className="center-page">
-          <span className="spinner primary"></span>
+        <div>
+          <span></span>
           <p>Loading...</p>
         </div>
       )}

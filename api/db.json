@@ -746,7 +746,7 @@
       "contractTypeId": 4,
       "contractSignedOn": "2015-11-26T08:23:22.651Z",
       "budget": 94900,
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 69,

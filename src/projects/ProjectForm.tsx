@@ -83,9 +83,9 @@ function ProjectForm({
   }
 
   return (
-    <div style={{width:"500px", border:"solid", borderColor:"lightgray", backgroundColor:"white", borderRadius:10}}>
+    <div style={{ border:"solid", borderColor:"lightgray", backgroundColor:"white", borderRadius:10}}>
       <form
-        className="input-group vertical"
+       
         onSubmit={handleSubmit}
         style={{fontFamily: "Jost, sans-serif", height:"378px", borderRadius:10}}
       >
@@ -105,7 +105,7 @@ function ProjectForm({
         />
         {errors.name.length > 0 && (
           <div
-            className="card error"
+
             style={{  fontFamily: "Jost, sans-serif" }}
           >
             <p>{errors.name}</p>
@@ -127,7 +127,7 @@ function ProjectForm({
         />
         {errors.description.length > 0 && (
           <div
-            className="card error"
+
             style={{  fontFamily: "Jost, sans-serif" }}
           >
             <p>{errors.description}</p>
@@ -150,7 +150,6 @@ function ProjectForm({
         />
         {errors.budget.length > 0 && (
           <div
-            className="card error"
             style={{  fontFamily: "Jost, sans-serif" }}
           >
             <p>{errors.budget}</p>
@@ -170,9 +169,9 @@ function ProjectForm({
           onChange={handleChange}
           style={{  fontFamily: "Jost, sans-serif" }}
         />
-        <div className="input-group">
+        <div >
           <button
-            className="primary bordered medium"
+
             style={{  fontFamily: "Jost, sans-serif" }}
           >
             Save
@@ -180,7 +179,6 @@ function ProjectForm({
           <span />
           <button
             type="button"
-            className="bordered medium"
             onClick={onCancel}
             style={{  fontFamily: "Jost, sans-serif" }}
           >
