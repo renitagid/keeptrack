@@ -11,10 +11,7 @@ interface ProjectFormProps {
   onCancel: () => void;
 }
 
-function ProjectForm({
-  project: initialProject,
-  onCancel,
-}: ProjectFormProps) {
+function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
   const [project, setProject] = useState(initialProject);
   const [errors, setErrors] = useState({
     name: "",
@@ -83,16 +80,19 @@ function ProjectForm({
   }
 
   return (
-    <div style={{ border:"solid", borderColor:"lightgray", backgroundColor:"white", borderRadius:10}}>
+    <div
+      style={{
+        border: "solid",
+        borderColor: "lightgray",
+        backgroundColor: "white",
+        borderRadius: 10,
+      }}
+    >
       <form
-       
         onSubmit={handleSubmit}
-        style={{fontFamily: "Jost, sans-serif", height:"378px", borderRadius:10}}
+        style={{ height: "378px", borderRadius: 10 }}
       >
-        <label
-          htmlFor="name"
-          style={{  fontFamily: "Jost, sans-serif" }}
-        >
+        <label htmlFor="name" style={{}}>
           Project Name
         </label>
         <input
@@ -101,21 +101,15 @@ function ProjectForm({
           placeholder="enter name"
           value={project.name}
           onChange={handleChange}
-          style={{fontFamily: "Jost, sans-serif" }}
+          style={{}}
         />
         {errors.name.length > 0 && (
-          <div
-
-            style={{  fontFamily: "Jost, sans-serif" }}
-          >
+          <div style={{}}>
             <p>{errors.name}</p>
           </div>
         )}
 
-        <label
-          htmlFor="description"
-          style={{  fontFamily: "Jost, sans-serif" }}
-        >
+        <label htmlFor="description" style={{}}>
           Project Description
         </label>
         <textarea
@@ -123,21 +117,15 @@ function ProjectForm({
           placeholder="enter description"
           value={project.description}
           onChange={handleChange}
-          style={{  fontFamily: "Jost, sans-serif" }}
+          style={{}}
         />
         {errors.description.length > 0 && (
-          <div
-
-            style={{  fontFamily: "Jost, sans-serif" }}
-          >
+          <div style={{}}>
             <p>{errors.description}</p>
           </div>
         )}
 
-        <label
-          htmlFor="budget"
-          style={{  fontFamily: "Jost, sans-serif" }}
-        >
+        <label htmlFor="budget" style={{}}>
           Project Budget
         </label>
         <input
@@ -146,20 +134,15 @@ function ProjectForm({
           placeholder="enter budget"
           value={project.budget}
           onChange={handleChange}
-          style={{  fontFamily: "Jost, sans-serif" }}
+          style={{}}
         />
         {errors.budget.length > 0 && (
-          <div
-            style={{  fontFamily: "Jost, sans-serif" }}
-          >
+          <div style={{}}>
             <p>{errors.budget}</p>
           </div>
         )}
 
-        <label
-          htmlFor="isActive"
-          style={{  fontFamily: "Jost, sans-serif" }}
-        >
+        <label htmlFor="isActive" style={{}}>
           Active?
         </label>
         <input
@@ -167,21 +150,12 @@ function ProjectForm({
           name="isActive"
           checked={project.isActive}
           onChange={handleChange}
-          style={{  fontFamily: "Jost, sans-serif" }}
+          style={{}}
         />
-        <div >
-          <button
-
-            style={{  fontFamily: "Jost, sans-serif" }}
-          >
-            Save
-          </button>
+        <div>
+          <button style={{}}>Save</button>
           <span />
-          <button
-            type="button"
-            onClick={onCancel}
-            style={{  fontFamily: "Jost, sans-serif" }}
-          >
+          <button type="button" onClick={onCancel} style={{}}>
             Cancel
           </button>
         </div>

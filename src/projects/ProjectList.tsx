@@ -20,13 +20,13 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   };
 
   return (
-    <ul >
+    <ul>
       {/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
 
       {projects?.map((project) => (
-        <div key={project.id} >
+        <div key={project.id}>
           {project === projectBeingEdited ? (
-            <ProjectForm project={project} onCancel={cancelEditing}/>
+            <ProjectForm project={project} onCancel={cancelEditing} />
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}

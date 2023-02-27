@@ -75,7 +75,6 @@ function ProjectsPage() {
             onClick={() => handleViewClick("table")}
             style={{
               backgroundColor: `${tableButtonColor}`,
-              fontFamily: "Jost, sans-serif",
             }}
           >
             Table View
@@ -84,7 +83,6 @@ function ProjectsPage() {
             onClick={() => handleViewClick("card")}
             style={{
               backgroundColor: `${cardButtonColor}`,
-              fontFamily: "Jost, sans-serif",
             }}
           >
             Card View
@@ -93,20 +91,11 @@ function ProjectsPage() {
         <div
           style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
         >
-          <input
-            style={{ fontFamily: "Jost, sans-serif" }}
-            onChange={handleChange}
-          ></input>
-          <button
-            type="submit"
-            onClick={handleSearchClick}
-            style={{ fontFamily: "Jost, sans-serif" }}
-          >
+          <input style={{}} onChange={handleChange}></input>
+          <button type="submit" onClick={handleSearchClick} style={{}}>
             Search
           </button>
-          <div style={{ fontFamily: "Jost, sans-serif" }}>
-            Results: {filteredProjects.length}
-          </div>
+          <div style={{}}>Results: {filteredProjects.length}</div>
         </div>
       </div>
       {error && (

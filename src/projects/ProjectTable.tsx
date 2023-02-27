@@ -50,18 +50,12 @@ const ProjectTable = (props: ProjectListProps) => {
         <thead>
           <tr>
             <th style={{ maxWidth: 100 }}></th>
-            <th style={{ fontFamily: "Jost, sans-serif" }}>Name</th>
-            <th style={{ fontFamily: "Jost, sans-serif" }}>County</th>
-            <th style={{ minWidth: 400, fontFamily: "Jost, sans-serif" }}>
-              Description
-            </th>
+            <th style={{}}>Name</th>
+            <th style={{}}>County</th>
+            <th style={{ minWidth: 400 }}>Description</th>
             <th>Budget</th>
-            <th style={{ maxWidth: 100, fontFamily: "Jost, sans-serif" }}>
-              Active
-            </th>
-            <th style={{ maxWidth: 100, fontFamily: "Jost, sans-serif" }}>
-              Edit
-            </th>
+            <th style={{ maxWidth: 100 }}>Active</th>
+            <th style={{ maxWidth: 100 }}>Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -74,17 +68,12 @@ const ProjectTable = (props: ProjectListProps) => {
                   alt="preview"
                   style={{ width: 80, height: 80, objectFit: "cover" }}
                 />
-                <label style={{ fontFamily: "Jost, sans-serif", fontSize: 12 }}>
-                  View Details
-                </label>
+                <label style={{ fontSize: 12 }}>View Details</label>
               </td>
-              <td style={{ fontFamily: "Jost, sans-serif" }} data-label="Name">
+              <td style={{}} data-label="Name">
                 {project.name}
               </td>
-              <td
-                style={{ fontFamily: "Jost, sans-serif" }}
-                data-label="County"
-              >
+              <td style={{}} data-label="County">
                 {project.county}
               </td>
               <td
@@ -93,15 +82,11 @@ const ProjectTable = (props: ProjectListProps) => {
                   minWidth: 400,
                   maxHeight: 100,
                   overflow: "scroll",
-                  fontFamily: "Jost, sans-serif",
                 }}
               >
                 {project.description}
               </td>
-              <td
-                style={{ fontFamily: "Jost, sans-serif" }}
-                data-label="Budget"
-              >
+              <td style={{}} data-label="Budget">
                 ${project.budget.toLocaleString()}
               </td>
               <td data-label="Active?" style={{ maxWidth: 100 }}>

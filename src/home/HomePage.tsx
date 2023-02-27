@@ -20,25 +20,15 @@ function HomePage() {
       >
         Clean California
       </h2>
-      <p
-        style={{ fontSize: 60, color: "white", fontFamily: "Jost, sans-serif" }}
-      >
+      <p style={{ fontSize: 60, color: "white" }}>
         Park Beautification Projects
       </p>
-        <NavLink
-          to="/projects/"
-
-          style={{ fontFamily: "Jost, sans-serif", opacity:"80%" }}
-        >
-          View Projects
-        </NavLink>
-        <NavLink
-          to="/about/"
-
-          style={{ fontFamily: "Jost, sans-serif", opacity:"80%" }}
-        >
-          About Clean CA
-        </NavLink>
+      <NavLink to="/projects/" style={{ opacity: "80%" }}>
+        View Projects
+      </NavLink>
+      <NavLink to="/about/" style={{ opacity: "80%" }}>
+        About Clean CA
+      </NavLink>
     </div>
   );
 }
