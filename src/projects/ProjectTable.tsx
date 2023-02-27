@@ -43,8 +43,8 @@ const ProjectTable = (props: ProjectListProps) => {
       <table
         style={
           form === "open" || details === "open"
-            ? { opacity: "15%", maxHeight: 550 }
-            : { maxHeight: 550 }
+            ? { opacity: "15%", maxHeight: 600 }
+            : { maxHeight: 600 }
         }
       >
         <thead>
@@ -66,17 +66,17 @@ const ProjectTable = (props: ProjectListProps) => {
         </thead>
         <tbody>
           {projects?.map((project) => (
-            <tr
-              key={project.id}
-              style={{ marginTop: 3 }}
-              onClick={() => handleDetailsClick(project)}
-            >
+            <tr key={project.id} style={{ marginTop: 3 }}>
               <td style={{ maxWidth: 100 }}>
                 <img
+                  onClick={() => handleDetailsClick(project)}
                   src={project.imageUrl}
                   alt="preview"
                   style={{ width: 80, height: 80, objectFit: "cover" }}
                 />
+                <label style={{ fontFamily: "Jost, sans-serif", fontSize: 12 }}>
+                  View Details
+                </label>
               </td>
               <td style={{ fontFamily: "Jost, sans-serif" }} data-label="Name">
                 {project.name}
@@ -102,10 +102,14 @@ const ProjectTable = (props: ProjectListProps) => {
                 style={{ fontFamily: "Jost, sans-serif" }}
                 data-label="Budget"
               >
-                {project.budget}
+                ${project.budget.toLocaleString()}
               </td>
               <td data-label="Active?" style={{ maxWidth: 100 }}>
-                {project.isActive ? <p>✅</p> : <p>🔴</p>}
+                {project.isActive ? (
+                  <p style={{ margin: 0 }}>🟢</p>
+                ) : (
+                  <p style={{ margin: 0 }}>🔴</p>
+                )}
               </td>
               <td data-label="Edit" style={{ maxWidth: 100 }}>
                 <button
@@ -113,6 +117,8 @@ const ProjectTable = (props: ProjectListProps) => {
                     fontFamily: "Jost, san-serif",
                     color: "white",
                     backgroundColor: "#b7c9e2",
+                    padding: 1,
+                    margin: 0,
                   }}
                   className=" bordered"
                   onClick={() => {
@@ -131,16 +137,12 @@ const ProjectTable = (props: ProjectListProps) => {
           style={{
             position: "absolute",
             top: "20%",
-            left: "40%",
+            left: "30%",
             zIndex: 999,
             opacity: "100%",
           }}
         >
-          <ProjectForm
-            project={projectBeingEdited}
-            onCancel={cancelEditing}
-            formStyle="table"
-          />
+          <ProjectForm project={projectBeingEdited} onCancel={cancelEditing} />
         </div>
       ) : null}
       {details === "open" ? (
@@ -165,7 +167,17 @@ const ProjectTable = (props: ProjectListProps) => {
               borderRadius: 10,
             }}
           >
-            <button style={{width:40, margin:0, marginBottom:6, alignSelf:"end"}}onClick={cancelDetails}>X</button>
+            <button
+              style={{
+                width: 40,
+                margin: 0,
+                marginBottom: 6,
+                alignSelf: "end",
+              }}
+              onClick={cancelDetails}
+            >
+              X
+            </button>
             <ProjectDetail project={projectDetails} onCancel={cancelDetails} />
           </div>
         </div>

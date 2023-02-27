@@ -29,7 +29,6 @@ function ProjectsPage() {
     setFilteredProjects(projects);
   }, [projects]);
 
-
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const filter = (projects: Project[], params: string) => {
     const filteredProjects = projects?.filter((project) => {
@@ -62,12 +61,7 @@ function ProjectsPage() {
   const handleSearchClick = () => {
     filter(projects, search);
   };
-  const handleKeypress = (e: { keyCode: number; }) => {
-    //it triggers by pressing the enter key
-  if (e.keyCode === 13) {
-    handleSearchClick();
-  }
-}
+  
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -102,9 +96,9 @@ function ProjectsPage() {
           <input
             style={{ fontFamily: "Jost, sans-serif" }}
             onChange={handleChange}
-            onKeyPress={handleKeypress}
           ></input>
           <button
+            type="submit"
             onClick={handleSearchClick}
             style={{ fontFamily: "Jost, sans-serif" }}
           >
@@ -133,7 +127,6 @@ function ProjectsPage() {
       {!loading && view === "card" && (
         <ProjectList projects={filteredProjects} />
       )}
-
 
       {loading && (
         <div className="center-page">

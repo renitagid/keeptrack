@@ -790,7 +790,7 @@
       "contractTypeId": 4,
       "contractSignedOn": "2010-10-16T23:08:40.878Z",
       "budget": 24829,
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 73,

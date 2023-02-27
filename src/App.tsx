@@ -19,11 +19,11 @@ function App() {
       <Router>
         <div style={{display:"flex", flexDirection:"column"}}>
         <header className="sticky" style={{paddingTop:6, paddingLeft:6, height:56}}>
-          <NavLink to="/" className="button rounded">
+          <NavLink to="/" className="button rounded" style={{fontFamily:"Jost, sans-serif"}}>
             <span className="icon-home"></span>
             Home
           </NavLink>
-          <NavLink to="/projects/" className="button rounded">
+          <NavLink to="/projects/" className="button rounded" style={{fontFamily:"Jost, sans-serif"}}>
             Projects
           </NavLink>
         </header>

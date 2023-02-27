@@ -26,7 +26,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
       {projects?.map((project) => (
         <div className="cols-sm" key={project.id}>
           {project === projectBeingEdited ? (
-            <ProjectForm project={project} onCancel={cancelEditing} formStyle="card"/>
+            <ProjectForm project={project} onCancel={cancelEditing}/>
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}

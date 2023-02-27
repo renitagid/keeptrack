@@ -9,13 +9,11 @@ import { AnyAction } from "redux";
 interface ProjectFormProps {
   project: Project;
   onCancel: () => void;
-  formStyle: string;
 }
 
 function ProjectForm({
   project: initialProject,
   onCancel,
-  formStyle,
 }: ProjectFormProps) {
   const [project, setProject] = useState(initialProject);
   const [errors, setErrors] = useState({
@@ -85,11 +83,11 @@ function ProjectForm({
   }
 
   return (
-    <div className="card" style={{width:"320px", height:"428px"}}>
+    <div style={{width:"500px", border:"solid", borderColor:"lightgray", backgroundColor:"white", borderRadius:10}}>
       <form
         className="input-group vertical"
         onSubmit={handleSubmit}
-        style={{fontFamily: "Jost, sans-serif", height:"378px"}}
+        style={{fontFamily: "Jost, sans-serif", height:"378px", borderRadius:10}}
       >
         <label
           htmlFor="name"
