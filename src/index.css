@@ -4,10 +4,12 @@ body,
 .container,
 .center-page {
   height: 100%;
+  margin:0;
+  padding:0;
 }
 
-.center-page {
+/* .center-page {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */

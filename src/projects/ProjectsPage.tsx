@@ -8,6 +8,8 @@ import { ThunkDispatch } from "redux-thunk";
 import { ProjectState } from "./state/projectTypes";
 import ProjectTable from "./ProjectTable";
 import { Project } from "./Project";
+import { Container, Stack } from "@mui/system";
+import { Button } from "@mui/material";
 
 function ProjectsPage() {
   const loading = useSelector(
@@ -63,41 +65,41 @@ function ProjectsPage() {
   };
 
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <Container>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h1
-          style={{ fontFamily: "Gloock, serif", padding: 4, color: "#01579b" }}
+          style={{ padding: 4, color: "#01579b" }}
         >
           Current Projects
         </h1>
         <div>
-          <button
+          <Button
             onClick={() => handleViewClick("table")}
             style={{
               backgroundColor: `${tableButtonColor}`,
             }}
           >
             Table View
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => handleViewClick("card")}
             style={{
               backgroundColor: `${cardButtonColor}`,
             }}
           >
             Card View
-          </button>
+          </Button>
         </div>
         <div
           style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
         >
           <input style={{}} onChange={handleChange}></input>
-          <button type="submit" onClick={handleSearchClick} style={{}}>
+          <Button type="submit" onClick={handleSearchClick} style={{}}>
             Search
-          </button>
+          </Button>
           <div style={{}}>Results: {filteredProjects.length}</div>
         </div>
-      </div>
+      </Stack>
       {error && (
         <div>
           <div>
@@ -120,7 +122,7 @@ function ProjectsPage() {
           <p>Loading...</p>
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 

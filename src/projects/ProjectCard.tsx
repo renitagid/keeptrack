@@ -1,6 +1,6 @@
 import { Project } from "./Project";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { Button, Card, CardContent, CardMedia } from "@mui/material";
 
 function formatDescription(description: string): string {
   return description.substring(0, 70) + "...";
@@ -19,38 +19,22 @@ function ProjectCard(props: ProjectCardProps) {
   };
 
   return (
-    <Card sx={{ maxWidth: 320 }}>
-      <CardMedia
-        image={project.imageUrl}
-        sx={{ height: 200, objectFit: "cover" }}
-      />
-      <CardContent sx={{}}>
+    <Card elevation={5}  sx={{ maxWidth: 300, borderRadius: 2, height:"420px" }}>
+      <CardMedia component="img" image={project.imageUrl} height="200" />
+      <CardContent>
         <Link to={"/projects/" + project.id}>
-          <h5>
-            <strong>{project.name}</strong>
-          </h5>
-          <p style={{ fontFamily: "Jost, san-serif" }}>
-            {formatDescription(project.description)}
-          </p>
-          <p style={{ fontFamily: "Jost, san-serif" }}>
-            Budget: ${project.budget.toLocaleString()}
-          </p>
+          <h5>{project.name}</h5>
+          <p>{formatDescription(project.description)}</p>
+          <p>Budget: ${project.budget.toLocaleString()}</p>
         </Link>
-        <button
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            fontFamily: "Jost, san-serif",
-            color: "white",
-            backgroundColor: "#b7c9e2",
-          }}
+        <Button
+          variant="outlined"
           onClick={() => {
             handleEditClick(project);
           }}
         >
           Edit
-        </button>
+        </Button>
       </CardContent>
     </Card>
   );

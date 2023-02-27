@@ -7,41 +7,34 @@ import {
   NavLink,
 } from "react-router-dom";
 import AboutUs from "./about/AboutUs";
+import Header from "./home/Header";
 
 import "./App.css";
 import HomePage from "./home/HomePage";
 import ProjectPage from "./projects/ProjectPage";
 import ProjectsPage from "./projects/ProjectsPage";
 import { store } from "./state";
+import { Box } from "@mui/material";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div
+        <Box
           style={{
             display: "flex",
             flexDirection: "column",
             fontFamily: "Jost, sans-serif",
           }}
         >
-          <header style={{ paddingTop: 6, paddingLeft: 6, height: 56 }}>
-            <NavLink to="/" style={{}}>
-              Home
-            </NavLink>
-            <NavLink to="/projects/" style={{}}>
-              Projects
-            </NavLink>
-          </header>
-          <div style={{ padding: 0, margin: 0, height: "90vh" }}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/projects/:id" element={<ProjectPage />} />
-            </Routes>
-          </div>
-        </div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:id" element={<ProjectPage />} />
+          </Routes>
+        </Box>
       </Router>
     </Provider>
   );

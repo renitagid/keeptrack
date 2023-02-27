@@ -2,6 +2,7 @@ import { Project } from "./Project";
 import ProjectForm from "./ProjectForm";
 import { useState } from "react";
 import ProjectDetail from "./ProjectDetail";
+import { Button } from "@mui/material";
 // ----------------------------------------------
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
@@ -97,7 +98,7 @@ const ProjectTable = (props: ProjectListProps) => {
                 )}
               </td>
               <td data-label="Edit" style={{ maxWidth: 100 }}>
-                <button
+                <Button
                   style={{
                     fontFamily: "Jost, san-serif",
                     color: "white",
@@ -108,7 +109,7 @@ const ProjectTable = (props: ProjectListProps) => {
                   onClick={() => {
                     handleEditClick(project);
                   }}
-                ></button>
+                ></Button>
               </td>
             </tr>
           ))}
@@ -149,7 +150,7 @@ const ProjectTable = (props: ProjectListProps) => {
               borderRadius: 10,
             }}
           >
-            <button
+            <Button
               style={{
                 width: 40,
                 margin: 0,
@@ -159,7 +160,7 @@ const ProjectTable = (props: ProjectListProps) => {
               onClick={cancelDetails}
             >
               X
-            </button>
+            </Button>
             <ProjectDetail project={projectDetails} onCancel={cancelDetails} />
           </div>
         </div>

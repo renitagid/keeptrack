@@ -2,6 +2,7 @@ import { Project } from "./Project";
 import ProjectCard from "./ProjectCard";
 import ProjectForm from "./ProjectForm";
 import { useState } from "react";
+import { Grid } from "@mui/material";
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
 interface ProjectListProps {
@@ -20,19 +21,19 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   };
 
   return (
-    <ul>
+    <Grid container spacing={3} justifyContent="center">
       {/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
 
       {projects?.map((project) => (
-        <div key={project.id}>
+        <Grid item key={project.id}>
           {project === projectBeingEdited ? (
             <ProjectForm project={project} onCancel={cancelEditing} />
           ) : (
             <ProjectCard project={project} onEdit={handleEdit} />
           )}
-        </div>
+        </Grid>
       ))}
-    </ul>
+    </Grid>
   );
 };
 
