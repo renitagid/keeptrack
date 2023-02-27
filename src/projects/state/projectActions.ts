@@ -23,7 +23,7 @@ export function loadProjects(
   return (dispatch: any) => {
     dispatch({ type: LOAD_PROJECTS_REQUEST });
     return projectAPI
-      .get(page)
+      .get()
       .then((data) => {
         dispatch({
           type: LOAD_PROJECTS_SUCCESS,

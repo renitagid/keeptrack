@@ -83,10 +83,11 @@ const projectAPI = {
       });
   },
 
-  get(page = 1, limit = 20) {
-    return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
+  get() {
+    return fetch(`${url}?_sort=name`)
       .then(checkStatus)
       .then(parseJSON)
+      //convertToProjectModels is a TypeScript function that takes an array of objects and returns an array of Project objects. It creates a new array of Project objects and passes each object to the convertToProjectModel function.
       .then(convertToProjectModels)
       .catch((error: TypeError) => {
         console.log("log client error " + error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../state";
 import ProjectList from "./ProjectList";
@@ -19,9 +19,6 @@ function ProjectsPage() {
   const error = useSelector(
     (appState: AppState) => appState.projectState.error
   );
-  const currentPage = useSelector(
-    (appState: AppState) => appState.projectState.page
-  );
   const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
   useEffect(() => {
@@ -32,16 +29,14 @@ function ProjectsPage() {
     setFilteredProjects(projects);
   }, [projects]);
 
-  const handleMoreClick = () => {
-    dispatch(loadProjects(currentPage + 1));
-  };
 
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const filter = (projects: Project[], params: string) => {
     const filteredProjects = projects?.filter((project) => {
       return (
         project.name.toLowerCase().includes(params.toLowerCase()) ||
-        project.description.toLowerCase().includes(params.toLowerCase())
+        project.description.toLowerCase().includes(params.toLowerCase()) ||
+        project.county.toLowerCase().includes(params.toLowerCase())
       );
     });
     setFilteredProjects(filteredProjects);
@@ -67,6 +62,12 @@ function ProjectsPage() {
   const handleSearchClick = () => {
     filter(projects, search);
   };
+  const handleKeypress = (e: { keyCode: number; }) => {
+    //it triggers by pressing the enter key
+  if (e.keyCode === 13) {
+    handleSearchClick();
+  }
+}
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -101,6 +102,7 @@ function ProjectsPage() {
           <input
             style={{ fontFamily: "Jost, sans-serif" }}
             onChange={handleChange}
+            onKeyPress={handleKeypress}
           ></input>
           <button
             onClick={handleSearchClick}
@@ -132,17 +134,6 @@ function ProjectsPage() {
         <ProjectList projects={filteredProjects} />
       )}
 
-      {!loading && !error && (
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="button-group fluid">
-              <button className="button default" onClick={handleMoreClick}>
-                More...
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {loading && (
         <div className="center-page">

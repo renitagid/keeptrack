@@ -26,7 +26,7 @@ const ProjectTable = (props: ProjectListProps) => {
   //_______________________________________________
 
   return (
-    <div style={{ height: 550 }}>
+    <div style={{ height: "90%" }}>
       <table style={form==="open"?{opacity:"25%", maxHeight: 550}: {maxHeight: 550 }}>
         <thead>
           <tr>

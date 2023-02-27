@@ -29,7 +29,7 @@ function ProjectPage(props: any) {
   return (
     <div>
       <>
-        <h1>Project Detail</h1>
+        <h1>Project Details</h1>
 
         {loading && (
           <div className="center-page">
