@@ -65,7 +65,7 @@ function ProjectsPage() {
   };
 
   return (
-    <Container>
+    <Container sx={{width:"95%"}}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h1
           style={{ padding: 4, color: "#01579b" }}
@@ -76,7 +76,7 @@ function ProjectsPage() {
           <Button
             onClick={() => handleViewClick("table")}
             style={{
-              backgroundColor: `${tableButtonColor}`,
+              backgroundColor: `${tableButtonColor}`, borderTopRightRadius: 0, borderBottomRightRadius: 0
             }}
           >
             Table View
@@ -84,7 +84,7 @@ function ProjectsPage() {
           <Button
             onClick={() => handleViewClick("card")}
             style={{
-              backgroundColor: `${cardButtonColor}`,
+              backgroundColor: `${cardButtonColor}` , borderTopLeftRadius: 0, borderBottomLeftRadius: 0
             }}
           >
             Card View

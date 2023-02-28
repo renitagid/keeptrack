@@ -1,18 +1,38 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import ForestIcon from '@mui/icons-material/Forest';
+import ForestIcon from "@mui/icons-material/Forest";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
-const Header = () => {
+interface Props {
+  handleDarkMode: () => void;
+  darkMode: boolean;
+}
+
+const Header = ({ handleDarkMode, darkMode }: Props) => {
   return (
-    <AppBar component="nav" position="relative" sx={{backgroundColor:"#203966"}}>
-      <Toolbar disableGutters >
-        <ForestIcon sx={{color:"white", fontSize: 40,  marginLeft:1}}/>
-        <NavLink to="/" style={{color:"white", textDecoration:"none", marginLeft:15}}>
+    <AppBar
+      component="nav"
+      position="relative"
+      sx={{ backgroundColor: "#203966", height: "7vh", position: "sticky" }}
+    >
+      <Toolbar sx={{display:"flex", justifyContent:"space-between"}}>
+        <div style={{display:"flex", alignItems:"center"}}>
+        <ForestIcon sx={{ color: "white", fontSize: 40, marginLeft: 1 }} />
+        <NavLink
+          to="/"
+          style={{ color: "white", textDecoration: "none", marginLeft: 15 }}
+        >
           Home
         </NavLink>
-        <NavLink to="/projects/" style={{color:"white", textDecoration:"none", marginLeft:15}}>
+        <NavLink
+          to="/projects/"
+          style={{ color: "white", textDecoration: "none", marginLeft: 15 }}
+        >
           Projects
         </NavLink>
+        </div>
+        <Button style={{color:"white"}}onClick={handleDarkMode}>{darkMode?<LightModeIcon/>:<DarkModeIcon/>}</Button>
       </Toolbar>
     </AppBar>
   );

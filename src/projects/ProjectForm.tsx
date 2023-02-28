@@ -5,6 +5,7 @@ import { saveProject } from "./state/projectActions";
 import { ThunkDispatch } from "redux-thunk";
 import { ProjectState } from "./state/projectTypes";
 import { AnyAction } from "redux";
+import { Paper } from "@mui/material";
 
 interface ProjectFormProps {
   project: Project;
@@ -90,25 +91,34 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
     >
       <form
         onSubmit={handleSubmit}
-        style={{ height: "378px", borderRadius: 10 }}
+        style={{
+          height: "378px",
+          borderRadius: 10,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          color: "black",
+        }}
       >
-        <label htmlFor="name" style={{}}>
-          Project Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="enter name"
-          value={project.name}
-          onChange={handleChange}
-          style={{}}
-        />
-        {errors.name.length > 0 && (
-          <div style={{}}>
-            <p>{errors.name}</p>
-          </div>
-        )}
-
+        <div>
+          <label htmlFor="name" style={{}}>
+            Project Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            placeholder="enter name"
+            value={project.name}
+            onChange={handleChange}
+            style={{fontFamily:"Jost, san-serif"}}
+          />
+          {errors.name.length > 0 && (
+            <div style={{}}>
+              <p>{errors.name}</p>
+            </div>
+          )}
+        </div>
+        <div>
         <label htmlFor="description" style={{}}>
           Project Description
         </label>
@@ -124,7 +134,8 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
             <p>{errors.description}</p>
           </div>
         )}
-
+        </div>
+        <div>
         <label htmlFor="budget" style={{}}>
           Project Budget
         </label>
@@ -141,7 +152,8 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
             <p>{errors.budget}</p>
           </div>
         )}
-
+        </div>
+        <div>
         <label htmlFor="isActive" style={{}}>
           Active?
         </label>
@@ -152,6 +164,7 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
           onChange={handleChange}
           style={{}}
         />
+        </div>
         <div>
           <button style={{}}>Save</button>
           <span />

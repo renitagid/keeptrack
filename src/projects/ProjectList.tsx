@@ -21,7 +21,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   };
 
   return (
-    <Grid container spacing={3} justifyContent="center">
+    <Grid container spacing={2} justifyContent="center">
       {/* //the type of project does not need to be defined because it is defined in the Project interface and imported from Project.tsx in the interface ProjectListProps */}
 
       {projects?.map((project) => (

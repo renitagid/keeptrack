@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 //type of HomePage does not need to be defined because it is a functional component that returns JSX.
@@ -14,8 +14,8 @@ function HomePage() {
         width: "100%",
         paddingTop: 10,
         textAlign: "center",
-        position:"fixed",
-        zIndex: "-1"
+        position: "fixed",
+        zIndex: "-1",
       }}
     >
       <h2
