@@ -739,14 +739,14 @@
     },
     {
       "id": 68,
-      "name": "10 and 60 Corridors Safety Enhancement",
-      "county": "Los Angeles",
+      "name": "20 and 60 Corridors Safety Enhancement",
+      "county": "Los Angeles!",
       "description": "Upgrade/replace existing damaged fence; place rockscape at bridge abutments and abutment slopes; place metal cover at bridge openings to prevent access.",
       "imageUrl": "/assets/2.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2015-11-26T08:23:22.651Z",
-      "budget": 94900,
-      "isActive": false
+      "budget": 1001,
+      "isActive": true
     },
     {
       "id": 69,

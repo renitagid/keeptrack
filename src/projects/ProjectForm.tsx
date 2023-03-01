@@ -5,7 +5,7 @@ import { saveProject } from "./state/projectActions";
 import { ThunkDispatch } from "redux-thunk";
 import { ProjectState } from "./state/projectTypes";
 import { AnyAction } from "redux";
-import { Paper } from "@mui/material";
+import { Button, Card, CardContent } from "@mui/material";
 
 interface ProjectFormProps {
   project: Project;
@@ -18,6 +18,7 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
     name: "",
     description: "",
     budget: "",
+    county:""
   });
   const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
@@ -56,12 +57,18 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
   };
 
   function validate(project: Project) {
-    let errors: any = { name: "", description: "", budget: "" };
+    let errors: any = { name: "", county:"", description: "", budget: "" };
     if (project.name.length === 0) {
       errors.name = "Name is required";
     }
     if (project.name.length > 0 && project.name.length < 3) {
       errors.name = "Name needs to be at least 3 characters.";
+    }
+    if (project.county.length === 0) {
+      errors.county = "County is required";
+    }
+    if (project.county.length > 0 && project.county.length < 3) {
+      errors.county = "County needs to be at least 3 characters.";
     }
     if (project.description.length === 0) {
       errors.description = "Description is required.";
@@ -75,105 +82,146 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
   function isValid() {
     return (
       errors.name.length === 0 &&
+      errors.county.length === 0 && 
       errors.description.length === 0 &&
       errors.budget.length === 0
     );
   }
 
   return (
-    <div
-      style={{
-        border: "solid",
-        borderColor: "lightgray",
-        backgroundColor: "white",
-        borderRadius: 10,
-      }}
+    <Card
+    elevation={5}
+    sx={{ width: 250, borderRadius: 2, height: 420, position: "relative" }}
     >
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          height: "378px",
-          borderRadius: 10,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          color: "black",
-        }}
-      >
-        <div>
-          <label htmlFor="name" style={{}}>
-            Project Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="enter name"
-            value={project.name}
-            onChange={handleChange}
-            style={{fontFamily:"Jost, san-serif"}}
-          />
-          {errors.name.length > 0 && (
-            <div style={{}}>
-              <p>{errors.name}</p>
-            </div>
-          )}
-        </div>
-        <div>
-        <label htmlFor="description" style={{}}>
-          Project Description
-        </label>
-        <textarea
-          name="description"
-          placeholder="enter description"
-          value={project.description}
-          onChange={handleChange}
-          style={{}}
-        />
-        {errors.description.length > 0 && (
-          <div style={{}}>
-            <p>{errors.description}</p>
+      <CardContent>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            height: "378px",
+            borderRadius: 10,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            color: "black",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label htmlFor="name" style={{}}>
+              Project Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter name"
+              value={project.name}
+              onChange={handleChange}
+              style={{ fontFamily: "Jost, san-serif" }}
+            />
+            {errors.name.length > 0 && (
+              <div style={{color:"red", fontSize:12, lineHeight:0}}>
+                <p>{errors.name}</p>
+              </div>
+            )}
           </div>
-        )}
-        </div>
-        <div>
-        <label htmlFor="budget" style={{}}>
-          Project Budget
-        </label>
-        <input
-          type="number"
-          name="budget"
-          placeholder="enter budget"
-          value={project.budget}
-          onChange={handleChange}
-          style={{}}
-        />
-        {errors.budget.length > 0 && (
-          <div style={{}}>
-            <p>{errors.budget}</p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label htmlFor="county" style={{}}>
+              County
+            </label>
+            <input
+              type="text"
+              name="county"
+              placeholder="Enter county"
+              value={project.county}
+              onChange={handleChange}
+              style={{ fontFamily: "Jost, san-serif" }}
+            />
+            {errors.county.length > 0 && (
+              <div style={{color:"red", fontSize:12, lineHeight:0}}>
+                <p>{errors.county}</p>
+              </div>
+            )}
           </div>
-        )}
-        </div>
-        <div>
-        <label htmlFor="isActive" style={{}}>
-          Active?
-        </label>
-        <input
-          type="checkbox"
-          name="isActive"
-          checked={project.isActive}
-          onChange={handleChange}
-          style={{}}
-        />
-        </div>
-        <div>
-          <button style={{}}>Save</button>
-          <span />
-          <button type="button" onClick={onCancel} style={{}}>
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label htmlFor="description">Project Description</label>
+            <textarea
+              name="description"
+              placeholder="Enter description"
+              value={project.description}
+              onChange={handleChange}
+              style={{ fontFamily: "Jost, san-serif" }}
+            />
+            {errors.description.length > 0 && (
+              <div style={{color:"red", fontSize:12, lineHeight:0}}>
+                <p>{errors.description}</p>
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label htmlFor="budget" style={{}}>
+              Project Budget
+            </label>
+            <input
+              type="number"
+              name="budget"
+              placeholder="enter budget"
+              value={project.budget}
+              onChange={handleChange}
+              style={{ fontFamily: "Jost, san-serif" }}
+            />
+            {errors.budget.length > 0 && (
+              <div style={{color:"red", fontSize:12, lineHeight:0}}>
+                <p>{errors.budget}</p>
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
+            <label htmlFor="isActive" style={{}}>
+              Active?
+            </label>
+            <input
+              type="checkbox"
+              name="isActive"
+              checked={project.isActive}
+              onChange={handleChange}
+              style={{}}
+            />
+          </div>
+          <div style={{display:"flex", justifyContent:"space-evenly"}}>
+            <Button type="submit" variant="outlined">Save</Button>
+            <span />
+            <Button variant="outlined" onClick={onCancel}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
 
