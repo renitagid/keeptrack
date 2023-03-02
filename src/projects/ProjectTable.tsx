@@ -10,7 +10,7 @@ import { saveProject } from "./state/projectActions";
 import { ThunkDispatch } from "redux-thunk";
 import { ProjectState } from "./state/projectTypes";
 import { AnyAction } from "redux";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 // ----------------------------------------------
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
@@ -34,6 +34,11 @@ const ProjectTable = (props: ProjectListProps) => {
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",
+        muiTableHeadProps: {
+          style: {
+            backgroundColor: "#203966",
+          },
+        },
         muiTableBodyCellEditTextFieldProps: {
           error: !!validationErrors.name, //highlight mui text field red error color
           helperText: validationErrors.name, //show error message in helper text.
@@ -176,22 +181,36 @@ const ProjectTable = (props: ProjectListProps) => {
         columns={columns}
         data={projects}
         enableEditing
+        enableStickyHeader
         onEditingRowSave={handleSaveRow}
-        renderDetailPanel={({ row }) => (
-          <Box
-          sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}
-          >
-            <img
-              style={{ width: "200px", height: "100px", objectFit:"cover" }}
-              src={row.original.imageUrl}
-              alt={row.original.name}
-            />
-            <Typography>
-              Signed: {row.original.contractSignedOn.toLocaleDateString()}
-            </Typography>
-            <mark>{row.original.isActive ? "Active" : "Inactive"}</mark>
-          </Box>
-        )}
+        muiTableHeadCellProps={{
+                sx: (theme) => ({
+                  background: '#8f9cb2',
+                  borderBottom: '1px solid rgba(32,57,102,1)',
+                  color: theme.palette.text.primary,
+                })}}
+        renderDetailPanel={({ row }) => {
+          const dateObject = new Date(row.original.contractSignedOn);
+          return (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <img
+                style={{ width: "200px", height: "100px", objectFit: "cover" }}
+                src={row.original.imageUrl}
+                alt={row.original.name}
+              />
+              <>
+                <span>{`Signed: ${dateObject.toLocaleDateString()}`}</span>
+                <mark>{row.original.isActive ? "Active" : "Inactive"}</mark>
+              </>
+            </Box>
+          );
+        }}
       />
     </div>
   );

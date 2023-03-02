@@ -740,12 +740,12 @@
     {
       "id": 68,
       "name": "20 and 60 Corridors Safety Enhancement",
-      "county": "Los Angeles!",
+      "county": "Los Angeles",
       "description": "Upgrade/replace existing damaged fence; place rockscape at bridge abutments and abutment slopes; place metal cover at bridge openings to prevent access.",
       "imageUrl": "/assets/2.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2015-11-26T08:23:22.651Z",
-      "budget": 1001,
+      "budget": "1001",
       "isActive": true
     },
     {
@@ -789,7 +789,7 @@
       "imageUrl": "/assets/5.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2010-10-16T23:08:40.878Z",
-      "budget": "50500",
+      "budget": "50505",
       "isActive": false
     },
     {
@@ -895,7 +895,7 @@
       "id": 82,
       "name": "San Bernardino Gateway Monument",
       "county": "San Bernardino",
-      "description": "Install one gateway monument sign identifying State Route 18 as a gateway to the San Bernardino Mountains.",
+      "description": "Install one gateway monument sign identifying State Route 20 as a gateway to the San Bernardino Mountains.",
       "imageUrl": "/assets/13.jpg",
       "contractTypeId": 7,
       "contractSignedOn": "2015-06-17T01:04:42.491Z",

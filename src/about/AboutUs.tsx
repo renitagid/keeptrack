@@ -1,6 +1,6 @@
 function AboutUs() {
   return (
-    <div>
+    <div style={{width:"70%", height:"100vh", display:"flex", flexDirection:"column", alignItems:"center", margin:"0 auto", textAlign:"center"}}>
       <h1 style={{ fontFamily: "Gloock, serif" }}>About Clean California</h1>
       <h2>
         A transformative initiative to remove litter, create jobs and beautify

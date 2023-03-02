@@ -6,7 +6,6 @@ function HomePage() {
   return (
     <Box
       sx={{
-
         backgroundImage: "url(assets/landingpage.jpeg)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100%, 100%",
@@ -27,11 +26,21 @@ function HomePage() {
         Park Beautification Projects
       </p>
 
-      <Button component={NavLink} to="/projects/" variant="contained" sx={{margin:3}}>
+      <Button
+        component={NavLink}
+        to="/projects/"
+        variant="contained"
+        sx={{ margin: 3 }}
+      >
         View Projects
       </Button>
 
-      <Button component={NavLink} to="/about/" variant="contained"sx={{margin:3}}>
+      <Button
+        component={NavLink}
+        to="/about/"
+        variant="contained"
+        sx={{ margin: 3 }}
+      >
         About Clean CA
       </Button>
     </Box>
