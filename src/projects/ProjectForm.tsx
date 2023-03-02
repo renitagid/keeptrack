@@ -101,8 +101,7 @@ function ProjectForm({ project: initialProject, onCancel }: ProjectFormProps) {
             borderRadius: 10,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
-            color: "black",
+            justifyContent: "space-between"
           }}
         >
           <div

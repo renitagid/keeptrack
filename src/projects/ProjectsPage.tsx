@@ -44,16 +44,16 @@ function ProjectsPage() {
   };
 
   const [view, setView] = useState("table");
-  const [tableButtonColor, setTableButtonColor] = useState("#b7c9e2");
+  const [tableButtonColor, setTableButtonColor] = useState("#203966");
   const [cardButtonColor, setCardButtonColor] = useState("white");
   const handleViewClick = (view: string): void => {
     setView(view);
     if (view === "table") {
-      setTableButtonColor("#b7c9e2");
+      setTableButtonColor("#203966");
       setCardButtonColor("white");
     } else if (view === "card") {
       setTableButtonColor("white");
-      setCardButtonColor("#b7c9e2");
+      setCardButtonColor("#203966");
     }
   };
   const [search, setSearch] = useState("");
@@ -65,15 +65,26 @@ function ProjectsPage() {
   };
 
   return (
-    <Container sx={{width:"95%"}}>
+    <Container sx={{width:"95%", padding:3}}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h1
           style={{ padding: 4, color: "#01579b" }}
         >
           Current Projects
         </h1>
+        {view==="card" && <div
+          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
+        >
+          <input style={{}} onChange={handleChange}></input>
+          <Button type="submit" onClick={handleSearchClick} style={{}}>
+            Search
+          </Button>
+          <div style={{}}>Results: {filteredProjects.length}</div>
+        </div>}
         <div>
           <Button
+
+            variant="outlined"
             onClick={() => handleViewClick("table")}
             style={{
               backgroundColor: `${tableButtonColor}`, borderTopRightRadius: 0, borderBottomRightRadius: 0
@@ -82,6 +93,7 @@ function ProjectsPage() {
             Table View
           </Button>
           <Button
+          variant="outlined"
             onClick={() => handleViewClick("card")}
             style={{
               backgroundColor: `${cardButtonColor}` , borderTopLeftRadius: 0, borderBottomLeftRadius: 0
@@ -90,15 +102,7 @@ function ProjectsPage() {
             Card View
           </Button>
         </div>
-        <div
-          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
-        >
-          <input style={{}} onChange={handleChange}></input>
-          <Button type="submit" onClick={handleSearchClick} style={{}}>
-            Search
-          </Button>
-          <div style={{}}>Results: {filteredProjects.length}</div>
-        </div>
+        
       </Stack>
       {error && (
         <div>

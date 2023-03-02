@@ -684,14 +684,14 @@
     },
     {
       "id": 63,
-      "name": "105 Willowbrook Trail",
+      "name": "Willowbrook Trail",
       "county": "Los Angeles",
       "description": "Construct approximately 2,650 linear feet of walking paths.",
       "imageUrl": "/assets/30.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2014-12-28T15:33:38.142Z",
-      "budget": 49925,
-      "isActive": false
+      "budget": "49925",
+      "isActive": "true"
     },
     {
       "id": 64,
@@ -785,11 +785,11 @@
       "id": 72,
       "name": "110 Imperial Highway - Adams",
       "county": "Los Angeles",
-      "description": "Install trees, shrubs, ground covers to improve existing roadside conditions on Route 110. Vine planting will be provided to prevent graffiti. On and off ramps to communities will be enhanced with soft and hardscape design.",
+      "description": "Install trees, shrubs, ground cover to improve existing roadside conditions on Route 110. Vine planting will be provided to prevent graffiti. On and off ramps to communities will be enhanced with soft and hardscape design.",
       "imageUrl": "/assets/5.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2010-10-16T23:08:40.878Z",
-      "budget": 24829,
+      "budget": "50500",
       "isActive": false
     },
     {

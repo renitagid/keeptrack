@@ -1,8 +1,16 @@
 import { Project } from "./Project";
-import ProjectForm from "./ProjectForm";
-import { useState } from "react";
-import ProjectDetail from "./ProjectDetail";
-import { Button } from "@mui/material";
+import { useMemo, useState } from "react";
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from "material-react-table";
+
+import { useDispatch } from "react-redux";
+import { saveProject } from "./state/projectActions";
+import { ThunkDispatch } from "redux-thunk";
+import { ProjectState } from "./state/projectTypes";
+import { AnyAction } from "redux";
+import { Box, Typography } from "@mui/material";
 // ----------------------------------------------
 
 //An interface is a way to define the shape of an object. It includes the name of the properties and their types.
@@ -13,158 +21,178 @@ interface ProjectListProps {
 //The ProjectList component is a functional component that takes a list of projects as a prop and renders them as JSON.
 const ProjectTable = (props: ProjectListProps) => {
   const { projects } = props;
-  const [form, setForm] = useState("closed");
-  const [projectBeingEdited, setProjectBeingEdited] = useState<Project>(
-    projects[0]
+  //set the initial state to an object containing key value pairs for each field in the form like this:
+  const [validationErrors, setValidationErrors] = useState({
+    name: "",
+    county: "",
+    description: "",
+    budget: "",
+  });
+  const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
+  const columns = useMemo<MRT_ColumnDef<Project>[]>(
+    () => [
+      {
+        accessorKey: "name", //access nested data with dot notation
+        header: "Name",
+        muiTableBodyCellEditTextFieldProps: {
+          error: !!validationErrors.name, //highlight mui text field red error color
+          helperText: validationErrors.name, //show error message in helper text.
+          required: true,
+          type: "string",
+          onChange: (event) => {
+            const value = event.target.value;
+            //validation logic
+            if (!value) {
+              setValidationErrors((prev) => ({
+                ...prev,
+                name: "Name is required",
+              }));
+            } else if (value.length < 3) {
+              setValidationErrors({
+                ...validationErrors,
+                name: "Name must be longer than 3 characters",
+              });
+            } else {
+              setValidationErrors({
+                ...validationErrors,
+                name: "",
+              });
+            }
+          },
+        },
+      },
+      {
+        accessorKey: "county",
+        header: "County",
+        muiTableBodyCellEditTextFieldProps: {
+          error: !!validationErrors.county, //highlight mui text field red error color
+          helperText: validationErrors.county, //show error message in helper text.
+          required: true,
+          type: "string",
+          onChange: (event) => {
+            const value = event.target.value;
+            //validation logic
+            if (!value) {
+              setValidationErrors((prev) => ({
+                ...prev,
+                county: "County is required",
+              }));
+            } else if (value.length < 3) {
+              setValidationErrors({
+                ...validationErrors,
+                county: "County must be longer than 3 characters",
+              });
+            } else {
+              setValidationErrors({
+                ...validationErrors,
+                county: "",
+              });
+            }
+          },
+        },
+      },
+      {
+        accessorKey: "description", //normal accessorKey
+        header: "Description",
+        muiTableBodyCellEditTextFieldProps: {
+          error: !!validationErrors.description, //highlight mui text field red error color
+          helperText: validationErrors.description, //show error message in helper text.
+          required: true,
+          type: "string",
+          onChange: (event) => {
+            const value = event.target.value;
+            //validation logic
+            if (!value) {
+              setValidationErrors((prev) => ({
+                ...prev,
+                description: "Description is required",
+              }));
+            } else if (value.length < 3) {
+              setValidationErrors({
+                ...validationErrors,
+                description: "Description must be longer than 3 characters",
+              });
+            } else {
+              setValidationErrors({
+                ...validationErrors,
+                description: "",
+              });
+            }
+          },
+        },
+      },
+      {
+        accessorKey: "budget",
+        header: "Budget",
+        muiTableBodyCellEditTextFieldProps: {
+          error: !!validationErrors.budget, //highlight mui text field red error color
+          helperText: validationErrors.budget, //show error message in helper text.
+          required: true,
+          type: "number",
+          onChange: (event) => {
+            const value = +event.target.value;
+            //validation logic
+            if (!value) {
+              setValidationErrors((prev) => ({
+                ...prev,
+                budget: "Budget is required",
+              }));
+            } else if (value === 0) {
+              setValidationErrors({
+                ...validationErrors,
+                budget: "Budget must be greater than 0",
+              });
+            } else {
+              setValidationErrors({
+                ...validationErrors,
+                budget: "",
+              });
+            }
+          },
+        },
+      },
+    ],
+    [validationErrors]
   );
 
-  const cancelEditing = () => {
-    setForm("closed");
-  };
+  //the initial state of the table data is the projects prop
+  const [tableData, setTableData] = useState<Project[]>(projects);
 
-  const handleEditClick = (project: Project) => {
-    setProjectBeingEdited(project);
-    setForm("open");
-  };
+  const handleSaveRow: MaterialReactTableProps<Project>["onEditingRowSave"] =
+    async ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
 
-  const [details, setDetails] = useState("closed");
-  const [projectDetails, setProjectDetails] = useState<Project>(projects[0]);
+      let updatedProject: Project = { ...projects[row.index], ...values }; //merge the old and new values
+      console.log(projects[0]);
+      dispatch(saveProject(updatedProject));
 
-  const cancelDetails = () => {
-    setDetails("closed");
-  };
-
-  const handleDetailsClick = (project: Project) => {
-    setProjectDetails(project);
-    setDetails("open");
-  };
+      setTableData([...tableData]);
+      exitEditingMode(); //required to exit editing mode
+    };
 
   return (
     <div style={{ height: "90%" }}>
-      <table
-        style={
-          form === "open" || details === "open"
-            ? { opacity: "15%", maxHeight: 600 }
-            : { maxHeight: 600 }
-        }
-      >
-        <thead>
-          <tr>
-            <th style={{ maxWidth: 100 }}></th>
-            <th style={{}}>Name</th>
-            <th style={{}}>County</th>
-            <th style={{ minWidth: 400 }}>Description</th>
-            <th>Budget</th>
-            <th style={{ maxWidth: 100 }}>Active</th>
-            <th style={{ maxWidth: 100 }}>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects?.map((project) => (
-            <tr key={project.id} style={{ marginTop: 3 }}>
-              <td style={{ maxWidth: 100 }}>
-                <img
-                  onClick={() => handleDetailsClick(project)}
-                  src={project.imageUrl}
-                  alt="preview"
-                  style={{ width: 80, height: 80, objectFit: "cover" }}
-                />
-                <label style={{ fontSize: 12 }}>View Details</label>
-              </td>
-              <td style={{}} data-label="Name">
-                {project.name}
-              </td>
-              <td style={{}} data-label="County">
-                {project.county}
-              </td>
-              <td
-                data-label="Description"
-                style={{
-                  minWidth: 400,
-                  maxHeight: 100,
-                  overflow: "scroll",
-                }}
-              >
-                {project.description}
-              </td>
-              <td style={{}} data-label="Budget">
-                ${project.budget.toLocaleString()}
-              </td>
-              <td data-label="Active?" style={{ maxWidth: 100 }}>
-                {project.isActive ? (
-                  <p style={{ margin: 0 }}>🟢</p>
-                ) : (
-                  <p style={{ margin: 0 }}>🔴</p>
-                )}
-              </td>
-              <td data-label="Edit" style={{ maxWidth: 100 }}>
-                <Button
-                  style={{
-                    fontFamily: "Jost, san-serif",
-                    color: "white",
-                    backgroundColor: "#b7c9e2",
-                    padding: 1,
-                    margin: 0,
-                  }}
-                  onClick={() => {
-                    handleEditClick(project);
-                  }}
-                ></Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {form === "open" ? (
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            left: "30%",
-            zIndex: 999,
-            opacity: "100%",
-          }}
-        >
-          <ProjectForm project={projectBeingEdited} onCancel={cancelEditing} />
-        </div>
-      ) : null}
-      {details === "open" ? (
-        <div
-          style={{
-            position: "absolute",
-            top: "9%",
-            left: "30%",
-            zIndex: 999,
-            opacity: "100%",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "white",
-              width: "500px",
-              display: "flex",
-              flexDirection: "column",
-              padding: 20,
-              border: "solid",
-              borderWidth: 2,
-              borderRadius: 10,
-            }}
+      <MaterialReactTable
+        columns={columns}
+        data={projects}
+        enableEditing
+        onEditingRowSave={handleSaveRow}
+        renderDetailPanel={({ row }) => (
+          <Box
+          sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}
           >
-            <Button
-              style={{
-                width: 40,
-                margin: 0,
-                marginBottom: 6,
-                alignSelf: "end",
-              }}
-              onClick={cancelDetails}
-            >
-              X
-            </Button>
-            <ProjectDetail project={projectDetails} onCancel={cancelDetails} />
-          </div>
-        </div>
-      ) : null}
+            <img
+              style={{ width: "200px", height: "100px", objectFit:"cover" }}
+              src={row.original.imageUrl}
+              alt={row.original.name}
+            />
+            <Typography>
+              Signed: {row.original.contractSignedOn.toLocaleDateString()}
+            </Typography>
+            <mark>{row.original.isActive ? "Active" : "Inactive"}</mark>
+          </Box>
+        )}
+      />
     </div>
   );
 };
