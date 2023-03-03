@@ -745,7 +745,7 @@
       "imageUrl": "/assets/2.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2015-11-26T08:23:22.651Z",
-      "budget": "1001",
+      "budget": 10012,
       "isActive": true
     },
     {
@@ -783,13 +783,13 @@
     },
     {
       "id": 72,
-      "name": "110 Imperial Highway - Adams",
+      "name": "110 Imperial Highway",
       "county": "Los Angeles",
       "description": "Install trees, shrubs, ground cover to improve existing roadside conditions on Route 110. Vine planting will be provided to prevent graffiti. On and off ramps to communities will be enhanced with soft and hardscape design.",
       "imageUrl": "/assets/5.jpg",
       "contractTypeId": 4,
       "contractSignedOn": "2010-10-16T23:08:40.878Z",
-      "budget": "50505",
+      "budget": "50500",
       "isActive": false
     },
     {
@@ -888,7 +888,7 @@
       "imageUrl": "/assets/12.jpg",
       "contractTypeId": 5,
       "contractSignedOn": "2012-08-09T13:45:53.932Z",
-      "budget": 130,
+      "budget": 130000,
       "isActive": true
     },
     {

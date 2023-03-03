@@ -39,13 +39,11 @@ export function loadProjects(
 export function saveProject(
   project: Project
 ): ThunkAction<void, ProjectState, null, Action<string>> {
-  console.log("saveProject action creator called with project:", project)
   return (dispatch: any) => {
     dispatch({ type: SAVE_PROJECT_REQUEST });
     return projectAPI
       .put(project)
       .then((data) => {
-        console.log("Response from put:", data )
         dispatch({ type: SAVE_PROJECT_SUCCESS, payload: data });
       })
       .catch((error) => {

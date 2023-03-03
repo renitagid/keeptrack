@@ -166,15 +166,13 @@ const ProjectTable = (props: ProjectListProps) => {
   const handleSaveRow: MaterialReactTableProps<Project>["onEditingRowSave"] =
     async ({ exitEditingMode, row, values }) => {
       tableData[row.index] = values;
-
       let updatedProject: Project = { ...projects[row.index], ...values }; //merge the old and new values
-      console.log(projects[0]);
+
       dispatch(saveProject(updatedProject));
 
       setTableData([...tableData]);
       exitEditingMode(); //required to exit editing mode
     };
-
   return (
     <div style={{ height: "90%" }}>
       <MaterialReactTable
@@ -184,11 +182,12 @@ const ProjectTable = (props: ProjectListProps) => {
         enableStickyHeader
         onEditingRowSave={handleSaveRow}
         muiTableHeadCellProps={{
-                sx: (theme) => ({
-                  background: '#8f9cb2',
-                  borderBottom: '1px solid rgba(32,57,102,1)',
-                  color: theme.palette.text.primary,
-                })}}
+          sx: (theme) => ({
+            background: "#8f9cb2",
+            borderBottom: "1px solid rgba(32,57,102,1)",
+            color: theme.palette.text.primary,
+          }),
+        }}
         renderDetailPanel={({ row }) => {
           const dateObject = new Date(row.original.contractSignedOn);
           return (
