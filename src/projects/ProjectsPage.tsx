@@ -32,7 +32,7 @@ function ProjectsPage() {
     setFilteredProjects(projects);
   }, [projects]);
 
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+  const [filteredProjects, setFilteredProjects] = useState(projects.filter(project=> project.county.includes("San Diego")));
   const filter = (projects: Project[], params: string) => {
     const filteredProjects = projects?.filter((project) => {
       return (
@@ -53,15 +53,12 @@ function ProjectsPage() {
     if (view === "table") {
       setTableButtonColor("#203966");
       setCardButtonColor("white");
-
       setChartButtonColor("white");
     } else if (view === "card") {
       setTableButtonColor("white");
-      setCardButtonColor("white");
-
-      setChartButtonColor("#203966");
+      setCardButtonColor("#203966");
+      setChartButtonColor("white");
     } else if (view === "chart") {
-
       setCardButtonColor("white");
       setTableButtonColor("white");
       setChartButtonColor("#203966");
