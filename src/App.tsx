@@ -14,6 +14,7 @@ import ProjectPage from "./projects/ProjectPage";
 import ProjectsPage from "./projects/ProjectsPage";
 import { store } from "./state";
 import { Box, createTheme, styled, ThemeProvider } from "@mui/material";
+import LocationsPage from "./locations/LocationsPage";
 
 function App() {
   const [darkMode, setDarkMode] = React.useState(true);
@@ -60,6 +61,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/locations" element={<LocationsPage />} />
               <Route path="/projects/:id" element={<ProjectPage />} />
             </Routes>
           </ThemeProvider>

@@ -31,6 +31,12 @@ const Header = ({ handleDarkMode, darkMode }: Props) => {
         >
           Projects
         </NavLink>
+        <NavLink
+          to="/locations/"
+          style={{ color: "white", textDecoration: "none", marginLeft: 15 }}
+        >
+          Locations
+        </NavLink>
         </div>
         <Button style={{color:"white"}}onClick={handleDarkMode}>{darkMode?<LightModeIcon/>:<DarkModeIcon/>}</Button>
       </Toolbar>
