@@ -10,6 +10,7 @@ import ProjectTable from "./ProjectTable";
 import { Project } from "./Project";
 import { Container, Stack } from "@mui/system";
 import { Button } from "@mui/material";
+import ProjectsCharts from "./ProjectsCharts";
 
 function ProjectsPage() {
   const loading = useSelector(
@@ -43,17 +44,27 @@ function ProjectsPage() {
     setFilteredProjects(filteredProjects);
   };
 
-  const [view, setView] = useState("table");
-  const [tableButtonColor, setTableButtonColor] = useState("#203966");
-  const [cardButtonColor, setCardButtonColor] = useState("white");
+  const [view, setView] = useState("card");
+  const [tableButtonColor, setTableButtonColor] = useState("white");
+  const [chartButtonColor, setChartButtonColor] = useState("white");
+  const [cardButtonColor, setCardButtonColor] = useState("#203966");
   const handleViewClick = (view: string): void => {
     setView(view);
     if (view === "table") {
       setTableButtonColor("#203966");
       setCardButtonColor("white");
+
+      setChartButtonColor("white");
     } else if (view === "card") {
       setTableButtonColor("white");
-      setCardButtonColor("#203966");
+      setCardButtonColor("white");
+
+      setChartButtonColor("#203966");
+    } else if (view === "chart") {
+
+      setCardButtonColor("white");
+      setTableButtonColor("white");
+      setChartButtonColor("#203966");
     }
   };
   const [search, setSearch] = useState("");
@@ -65,44 +76,58 @@ function ProjectsPage() {
   };
 
   return (
-    <Container sx={{width:"95%", padding:3}}>
+    <Container sx={{ width: "95%", padding: 3 }}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <h1
-          style={{ padding: 4, color: "#01579b" }}
-        >
-          Current Projects
-        </h1>
-        {view==="card" && <div
-          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
-        >
-          <input style={{}} onChange={handleChange}></input>
-          <Button type="submit" onClick={handleSearchClick} style={{}}>
-            Search
-          </Button>
-          <div style={{}}>Results: {filteredProjects.length}</div>
-        </div>}
+        <h1 style={{ padding: 4, color: "#01579b" }}>Current Projects</h1>
+        {view !== "table" && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginRight: "20px",
+            }}
+          >
+            <input style={{}} onChange={handleChange}></input>
+            <Button type="submit" onClick={handleSearchClick} style={{}}>
+              Search
+            </Button>
+            <div style={{}}>Results: {filteredProjects.length}</div>
+          </div>
+        )}
         <div>
           <Button
-
             variant="outlined"
             onClick={() => handleViewClick("table")}
             style={{
-              backgroundColor: `${tableButtonColor}`, borderTopRightRadius: 0, borderBottomRightRadius: 0
+              backgroundColor: `${tableButtonColor}`,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
             }}
           >
             Table View
           </Button>
           <Button
-          variant="outlined"
+            variant="outlined"
+            onClick={() => handleViewClick("chart")}
+            style={{
+              backgroundColor: `${chartButtonColor}`,
+              borderRadius: 0,
+            }}
+          >
+            Charts View
+          </Button>
+          <Button
+            variant="outlined"
             onClick={() => handleViewClick("card")}
             style={{
-              backgroundColor: `${cardButtonColor}` , borderTopLeftRadius: 0, borderBottomLeftRadius: 0
+              backgroundColor: `${cardButtonColor}`,
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
             }}
           >
             Card View
           </Button>
         </div>
-        
       </Stack>
       {error && (
         <div>
@@ -117,9 +142,11 @@ function ProjectsPage() {
         <ProjectTable projects={filteredProjects} />
       )}
       {!loading && view === "card" && (
-        <ProjectList projects={filteredProjects} />
+          <ProjectList projects={filteredProjects} />
       )}
-
+      {!loading && view === "chart" && (
+<ProjectsCharts projects={filteredProjects} />
+      )}
       {loading && (
         <div>
           <span></span>
