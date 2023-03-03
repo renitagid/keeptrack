@@ -1,5 +1,5 @@
 import { Project } from "./Project";
-const baseUrl = "http://localhost:4000";
+const baseUrl = "https://my-json-server.typicode.com/renitagid/keeptrack";
 const url = `${baseUrl}/projects`;
 
 function translateStatusToErrorMessage(status: number) {
