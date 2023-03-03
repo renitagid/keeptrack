@@ -29,19 +29,13 @@ function ProjectPage(props: any) {
   }, [params.id, props.id]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "lightgray",
-        position: "relative",
-        top: -20,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+<div style={{
+  display:"flex", justifyContent:"center"
+}}>
       <div
         style={{
           backgroundColor: "white",
+          color: "#203966",
           width: "50%",
           borderWidth: 2,
           border: "solid",
@@ -80,7 +74,7 @@ function ProjectPage(props: any) {
           )}
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 
